@@ -24,14 +24,6 @@ class MonteCarlo:
 
         # Calculate log returns
         log_returns_scaled = self.stock_analysis.log_returns_arr[-252:]
-        
-        # Fit an ARMA model to the data
-        arma_model = ARIMA(log_returns_scaled, order=(1, 0, 1))
-        arma_result = arma_model.fit()
-        
-        # Fit a GARCH model to the data
-        garch_model = arch_model(arma_result.resid, vol="Garch", p=1, q=1, rescale=False)
-        garch_result = garch_model.fit(disp="off")
 
         # Get the mean return and volatility
         mean_return = arma_result.params[0]
